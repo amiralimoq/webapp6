@@ -139,7 +139,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     function renderU(c,d,t){ c.innerHTML=''; if(d)d.forEach(u=>{ const div=document.createElement('div'); div.className='table-row'; div.innerHTML=`<span style="flex:1;font-weight:500;">${u.username}</span><span style="flex:1;text-align:right;"><button onclick="changePass('${t}',${u.id})" style="background:none;border:none;color:#F39C12;cursor:pointer;margin-right:10px;">Pass</button><button onclick="deleteUser('${t}',${u.id})" style="background:none;border:none;color:#E74C3C;cursor:pointer;">Delete</button></span>`; c.appendChild(div); }); }
     window.changePass=async(t,id)=>{ const p=prompt('New Pass:'); if(p)await supabaseClient.from(t).update({password:p}).eq('id',id); }
     window.deleteUser=async(t,id)=>{ if(confirm('Delete?')){ await supabaseClient.from(t).delete().eq('id',id); if(t==='staff')loadStaffList(); else loadAdminList(); } }
-
     // --- REVIEWS & MESSAGES ---
     let notif=false,sound=true;
     window.toggleNotifSetting=()=>{ notif=!notif; document.getElementById('notif-state').innerText=notif?'ON':'OFF'; document.getElementById('sound-btn').style.display=notif?'flex':'none'; }
