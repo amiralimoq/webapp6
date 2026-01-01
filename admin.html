@@ -12,7 +12,6 @@
     
     <!-- Base Styles -->
     <link rel="stylesheet" href="menu.css">
-    <!-- NEW SEPARATED STYLESHEET -->
     <link rel="stylesheet" href="admin.css">
     
 </head>
@@ -24,6 +23,7 @@
             <div class="logo">Admin<span>Panel</span></div>
             <ul class="menu-list">
                 <li class="menu-item active" data-target="dashboard"><i class="ri-dashboard-line"></i> Dashboard</li>
+                <li class="menu-item" data-target="menu-management"><i class="ri-restaurant-2-line"></i> Menu</li>
                 <li class="menu-item" data-target="customers"><i class="ri-user-heart-line"></i> Customers</li>
                 <li class="menu-item" data-target="discounts"><i class="ri-ticket-line"></i> Discounts</li>
                 <li class="menu-item" data-target="sales"><i class="ri-bar-chart-grouped-line"></i> Sales</li>
@@ -39,9 +39,9 @@
             <header class="header">
                 <div class="mobile-menu-btn" onclick="toggleSidebar()"><i class="ri-menu-2-line"></i></div>
                 <div class="search-bar" style="opacity: 0;"></div>
-                <div class="user-profile" id="profile-trigger" style="cursor: pointer;">
+                <div class="user-profile" id="profile-trigger">
                     <span id="header-username">Admin Manager</span>
-                    <div class="user-img" style="background-image: url('https://i.pravatar.cc/150?img=12');"></div>
+                    <div class="user-img"></div>
                 </div>
             </header>
             
@@ -49,27 +49,27 @@
 
             <!-- DASHBOARD SECTION -->
             <div id="dashboard" class="content-section active-section">
-                <h3 id="dashboard-date-title" style="margin-bottom: 20px; color: #2A2A2A; font-size: 18px;">...</h3>
+                <h3 id="dashboard-date-title" class="dash-date">...</h3>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: #E9FBF0; color: #2ECC71;"><i class="ri-shopping-basket-2-line"></i></div>
+                        <div class="stat-icon icon-green"><i class="ri-shopping-basket-2-line"></i></div>
                         <div>
-                            <div style="color: #888; font-size: 12px;">Total Orders (Month)</div>
+                            <div class="stat-label">Total Orders (Month)</div>
                             <h3 id="month-orders">...</h3>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon" style="background: #FFF0EB; color: #FF724C;"><i class="ri-money-dollar-circle-line"></i></div>
+                        <div class="stat-icon icon-orange"><i class="ri-money-dollar-circle-line"></i></div>
                         <div>
-                            <div style="color: #888; font-size: 12px;">Revenue (Month)</div>
+                            <div class="stat-label">Revenue (Month)</div>
                             <h3 id="month-revenue">...</h3>
                         </div>
                     </div>
                 </div>
                 
                 <div class="wh-container">
-                    <div style="font-size: 16px; font-weight: 600; margin-bottom: 15px;"><i class="ri-time-line"></i> Working Hours Settings</div>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <div class="wh-title"><i class="ri-time-line"></i> Working Hours Settings</div>
+                    <div class="wh-wrapper">
                         <div class="chip-dropdown" id="chip-start-time">
                             <button class="chip-btn" onclick="toggleChip('start-time')">Start: <span class="val">08:00</span> <i class="ri-arrow-down-s-line"></i></button>
                             <div class="chip-menu" id="menu-start-time"></div>
@@ -86,14 +86,79 @@
                             <button class="chip-btn" onclick="toggleChip('end-day')">To: <span class="val">Sunday</span> <i class="ri-arrow-down-s-line"></i></button>
                             <div class="chip-menu" id="menu-end-day"></div>
                         </div>
-                        <button id="save-wh-btn" class="btn-add" style="width: auto; padding: 8px 20px; border-radius: 20px; font-size: 13px;">Save</button>
+                        <button id="save-wh-btn" class="btn-add btn-sm">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MENU MANAGEMENT SECTION (CSS Extracted) -->
+            <div id="menu-management" class="content-section">
+                <div class="flex-between-center mb-20">
+                    <div class="section-title"><i class="ri-restaurant-2-line"></i> Menu Management</div>
+                    <button class="btn-add btn-sm">
+                        <i class="ri-add-line"></i> Add Item
+                    </button>
+                </div>
+                
+                <div class="clean-table">
+                    <div class="table-header">
+                        <span class="header-item flex-1">Image</span>
+                        <span class="header-item flex-2">Item Name</span>
+                        <span class="header-item flex-1">Category</span>
+                        <span class="header-item flex-1">Price</span>
+                        <span class="header-item flex-1">Status</span>
+                    </div>
+                    
+                    <!-- Item 1 -->
+                    <div class="table-row">
+                        <span class="flex-1"><div class="menu-img-box">🍔</div></span>
+                        <span class="flex-2 font-600">Royal Burger</span>
+                        <span class="flex-1 text-sm-grey">Main Course</span>
+                        <span class="flex-1 font-500">$12.50</span>
+                        <span class="flex-1"><span class="badge-status status-active">Active</span></span>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="table-row">
+                        <span class="flex-1"><div class="menu-img-box">🍕</div></span>
+                        <span class="flex-2 font-600">Pepperoni Pizza</span>
+                        <span class="flex-1 text-sm-grey">Main Course</span>
+                        <span class="flex-1 font-500">$15.00</span>
+                        <span class="flex-1"><span class="badge-status status-active">Active</span></span>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="table-row">
+                        <span class="flex-1"><div class="menu-img-box">🥗</div></span>
+                        <span class="flex-2 font-600">Caesar Salad</span>
+                        <span class="flex-1 text-sm-grey">Starters</span>
+                        <span class="flex-1 font-500">$8.00</span>
+                        <span class="flex-1"><span class="badge-status status-active">Active</span></span>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="table-row">
+                        <span class="flex-1"><div class="menu-img-box">🍟</div></span>
+                        <span class="flex-2 font-600">French Fries</span>
+                        <span class="flex-1 text-sm-grey">Sides</span>
+                        <span class="flex-1 font-500">$5.00</span>
+                        <span class="flex-1"><span class="badge-status status-inactive">Inactive</span></span>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="table-row">
+                        <span class="flex-1"><div class="menu-img-box">🥤</div></span>
+                        <span class="flex-2 font-600">Coca Cola</span>
+                        <span class="flex-1 text-sm-grey">Drinks</span>
+                        <span class="flex-1 font-500">$2.50</span>
+                        <span class="flex-1"><span class="badge-status status-active">Active</span></span>
                     </div>
                 </div>
             </div>
 
             <!-- CUSTOMERS SECTION -->
             <div id="customers" class="content-section">
-                <div style="margin-bottom: 20px; font-weight: 600; font-size: 18px;"><i class="ri-user-heart-line"></i> Customers</div>
+                <div class="section-title mb-20"><i class="ri-user-heart-line"></i> Customers</div>
                 <div class="pill-tabs">
                     <div class="pill-tab active-tab" onclick="switchCustomerTab('all', this)">All Customers</div>
                     <div class="pill-tab" onclick="switchCustomerTab('loyal', this)">Loyal (>3 Orders)</div>
@@ -105,24 +170,19 @@
                     <div id="customer-list"></div>
                 </div>
             </div>
-
-            <!-- DISCOUNTS SECTION (UPDATED) -->
+            <!-- DISCOUNTS SECTION -->
             <div id="discounts" class="content-section">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <div style="font-weight: 600; font-size: 18px;"><i class="ri-ticket-line"></i> Discounts Management</div>
-                    <button class="btn-add" style="width: auto; padding: 10px 25px;" onclick="openDiscountModal()">
+                <div class="flex-between-center mb-20">
+                    <div class="section-title"><i class="ri-ticket-line"></i> Discounts Management</div>
+                    <button class="btn-add btn-sm" onclick="openDiscountModal()">
                         <i class="ri-add-line"></i> Create Discount
                     </button>
                 </div>
 
-                <!-- DROPDOWN PILLS FOR FILTERS -->
                 <div class="pill-tabs" id="discount-filters-container">
-                    <!-- Reset Button -->
                     <div class="pill-tab active-tab" onclick="resetAllDiscountFilters(this)" id="btn-all-discounts">
                         <i class="ri-apps-line"></i> All
                     </div>
-
-                    <!-- Status Dropdown -->
                     <div class="pill-dropdown" id="dd-status">
                         <div class="pill-tab" onclick="togglePillMenu('status')">
                             <span id="label-status">Status: All</span> <i class="ri-arrow-down-s-line"></i>
@@ -134,8 +194,6 @@
                             <div class="pill-option" onclick="setDiscountFilter('status', 'expired', 'Expired')">Expired</div>
                         </div>
                     </div>
-
-                    <!-- Usage Dropdown -->
                     <div class="pill-dropdown" id="dd-usage">
                         <div class="pill-tab" onclick="togglePillMenu('usage')">
                             <span id="label-usage">Usage: All</span> <i class="ri-arrow-down-s-line"></i>
@@ -146,8 +204,6 @@
                             <div class="pill-option" onclick="setDiscountFilter('usage', 'multi', 'Multi Use')">Multi Use</div>
                         </div>
                     </div>
-
-                    <!-- Type Dropdown (Renamed from Scope) -->
                     <div class="pill-dropdown" id="dd-scope">
                         <div class="pill-tab" onclick="togglePillMenu('scope')">
                             <span id="label-scope">Type: All</span> <i class="ri-arrow-down-s-line"></i>
@@ -161,7 +217,6 @@
                 </div>
 
                 <div class="clean-table">
-                    <!-- FILTER BAR -->
                     <div class="filter-bar">
                         <div class="filter-group">
                             <span class="filter-label">Date Range</span>
@@ -200,22 +255,20 @@
                     </div>
 
                     <div class="table-header">
-                        <span class="header-item" style="flex:2">Code Name</span>
-                        <span class="header-item" style="flex:1">Type</span>
-                        <span class="header-item" style="flex:1">Usage Mode</span>
-                        <span class="header-item" style="flex:1">Min Order</span>
-                        <span class="header-item" style="flex:1">Status</span>
-                        <span class="header-item" style="flex:1; text-align: right;">Actions</span>
+                        <span class="header-item flex-2">Code Name</span>
+                        <span class="header-item flex-1">Type</span>
+                        <span class="header-item flex-1">Usage Mode</span>
+                        <span class="header-item flex-1">Min Order</span>
+                        <span class="header-item flex-1">Status</span>
+                        <span class="header-item flex-1 text-right">Actions</span>
                     </div>
-                    <div id="discount-list">
-                        <!-- Populated by JS -->
-                    </div>
+                    <div id="discount-list"></div>
                 </div>
             </div>
 
             <!-- SALES SECTION -->
             <div id="sales" class="content-section">
-                <div style="margin-bottom: 20px; font-weight: 600; font-size: 18px;">Sales Analytics</div>
+                <div class="section-title mb-20">Sales Analytics</div>
                 <div class="pill-tabs">
                     <div class="pill-tab active-tab" onclick="switchSalesMode('cash', this)">Cash Report</div>
                     <div class="pill-tab" onclick="switchSalesMode('product', this)">Product Report</div>
@@ -228,12 +281,12 @@
                         <div class="pill-tab" onclick="quickReport(365)">1 Year</div>
                     </div>
                     <div class="clean-table">
-                        <div style="color: #888;">Total Revenue</div>
+                        <div class="text-sm-grey">Total Revenue</div>
                         <h2 id="report-revenue" style="color: #2A2A2A; margin-top: 5px;">$0</h2>
                     </div>
                 </div>
                 <div id="sales-product-view" style="display: none;">
-                    <div class="chip-dropdown" id="chip-prod-range" style="margin-bottom: 20px;">
+                    <div class="chip-dropdown mb-20" id="chip-prod-range">
                         <button class="chip-btn" onclick="toggleChip('prod-range')"><i class="ri-calendar-event-line"></i> <span class="val">Last 7 Days</span> <i class="ri-arrow-down-s-line"></i></button>
                         <div class="chip-menu" id="menu-prod-range">
                             <div class="chip-option" onclick="setProductFilter(1, 'Today')">Today</div>
@@ -247,9 +300,9 @@
                     </div>
                     <div class="clean-table">
                         <div class="table-header">
-                            <span class="header-item" style="flex:2">Product Name</span>
-                            <span class="header-item" style="flex:1">Qty Sold</span>
-                            <span class="header-item" style="flex:1; text-align:right;">Total Sales</span>
+                            <span class="header-item flex-2">Product Name</span>
+                            <span class="header-item flex-1">Qty Sold</span>
+                            <span class="header-item flex-1 text-right">Total Sales</span>
                         </div>
                         <div id="product-list"></div>
                     </div>
@@ -258,34 +311,34 @@
 
             <!-- USERS SECTION -->
             <div id="users" class="content-section">
-                <div style="margin-bottom: 20px; font-weight: 600; font-size: 18px;">Users Management</div>
+                <div class="section-title mb-20">Users Management</div>
                 <div class="pill-tabs">
                     <div class="pill-tab active-tab" onclick="switchUserTab('staff', this)">Staff</div>
                     <div class="pill-tab" onclick="switchUserTab('admin', this)">Admins</div>
                 </div>
                 
                 <div id="user-tab-staff">
-                    <div class="clean-table" style="margin-bottom: 30px;">
-                        <h5 style="margin-bottom: 15px;">Create New Staff</h5>
+                    <div class="clean-table mb-20">
+                        <h5 class="mb-15">Create New Staff</h5>
                         <input type="text" id="new-user" class="form-control" placeholder="New Staff Username">
                         <input type="text" id="new-pass" class="form-control" placeholder="Password">
                         <button class="btn-add" id="create-btn">Create Staff</button>
                     </div>
                     <div class="clean-table">
-                        <h5 style="margin-bottom: 15px;">Active Staff List</h5>
+                        <h5 class="mb-15">Active Staff List</h5>
                         <div id="staff-list-container"></div>
                     </div>
                 </div>
                 
                 <div id="user-tab-admin" style="display: none;">
-                    <div class="clean-table" style="margin-bottom: 30px;">
-                        <h5 style="margin-bottom: 15px;">Create New Admin</h5>
+                    <div class="clean-table mb-20">
+                        <h5 class="mb-15">Create New Admin</h5>
                         <input type="text" id="admin-user" class="form-control" placeholder="Letters & Numbers">
                         <input type="text" id="admin-pass" class="form-control" placeholder="Letters & Numbers (Numbers optional)">
                         <button class="btn-add" id="create-admin-btn">Create Admin</button>
                     </div>
                     <div class="clean-table">
-                        <h5 style="margin-bottom: 15px;">Admins List</h5>
+                        <h5 class="mb-15">Admins List</h5>
                         <div id="admin-list-container"></div>
                     </div>
                 </div>
@@ -293,14 +346,14 @@
 
             <!-- TEMPLATES SECTION -->
             <div id="templates" class="content-section">
-                <div style="margin-bottom: 20px; font-weight: 600; font-size: 18px;">Menu Templates</div>
+                <div class="section-title mb-20">Menu Templates</div>
                 <div class="template-grid">
                     <div class="template-card" onclick="setTheme('default', this)">
                         <div class="check-icon"><i class="ri-check-line"></i></div>
                         <div class="template-preview" style="background:#fff;">🎨</div>
                         <div class="template-info">
                             <strong>Classic Light</strong>
-                            <p style="font-size:12px; color:#888;">Standard Orange & White</p>
+                            <p class="text-xs-grey">Standard Orange & White</p>
                         </div>
                     </div>
                     <div class="template-card" onclick="setTheme('dark', this)">
@@ -308,7 +361,7 @@
                         <div class="template-preview" style="background:#2A2A2A;">🌑</div>
                         <div class="template-info">
                             <strong>Midnight Dark</strong>
-                            <p style="font-size:12px; color:#888;">Elegant Dark Mode</p>
+                            <p class="text-xs-grey">Elegant Dark Mode</p>
                         </div>
                     </div>
                     <div class="template-card" onclick="setTheme('ocean', this)">
@@ -316,16 +369,15 @@
                         <div class="template-preview" style="background:#E3F2FD;">🌊</div>
                         <div class="template-info">
                             <strong>Ocean Blue</strong>
-                            <p style="font-size:12px; color:#888;">Fresh Blue & White</p>
+                            <p class="text-xs-grey">Fresh Blue & White</p>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- REVIEWS SECTION -->
             <div id="reviews" class="content-section">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                    <div style="font-weight: 600; font-size: 18px;">Customer Reviews</div>
+                <div class="flex-between-center mb-20">
+                    <div class="section-title">Customer Reviews</div>
                     <div style="display: flex; gap: 10px;">
                         <button class="chip-btn" id="notif-btn" onclick="toggleNotifSetting()">Notif: <span id="notif-state">OFF</span></button>
                         <button class="chip-btn" id="sound-btn" onclick="toggleSoundSetting()" style="display:none;">Sound: <span id="sound-state">ON</span></button>
@@ -341,41 +393,39 @@
         </main>
     </div>
 
-    <!-- PROFILE MODAL (Updated) -->
+    <!-- PROFILE MODAL (CSS Extracted) -->
     <div class="modal-overlay" id="profile-modal">
         <div class="modal-content">
             <i class="ri-close-line modal-close-icon" onclick="document.getElementById('profile-modal').style.display='none'"></i>
             
-            <!-- SECTION 1: EDIT PROFILE -->
-            <h3 style="margin-bottom: 15px;">Edit Account</h3>
-            <div style="margin-bottom: 20px;">
-                <label style="font-size:12px; font-weight:600; color:#888;">Username *</label>
-                <input type="text" id="edit-self-user" class="form-control" placeholder="roya" style="margin-bottom:10px;">
+            <h3 class="mb-15">Edit Account</h3>
+            <div class="mb-20">
+                <label class="label-sm">Username *</label>
+                <input type="text" id="edit-self-user" class="form-control mb-10" placeholder="roya">
                 
-                <label style="font-size:12px; font-weight:600; color:#888;">Password *</label>
-                <input type="text" id="edit-self-pass" class="form-control" placeholder="maman" style="margin-bottom:10px;">
+                <label class="label-sm">Password *</label>
+                <input type="text" id="edit-self-pass" class="form-control mb-10" placeholder="maman">
                 
-                <label style="font-size:12px; font-weight:600; color:#888;">Phone Number *</label>
-                <input type="text" id="edit-self-phone" class="form-control" placeholder="09..." style="margin-bottom:10px;">
+                <label class="label-sm">Phone Number *</label>
+                <input type="text" id="edit-self-phone" class="form-control mb-10" placeholder="09...">
                 
-                <label style="font-size:12px; font-weight:600; color:#888;">Email *</label>
-                <input type="email" id="edit-self-email" class="form-control" placeholder="example@mail.com" style="margin-bottom:10px;">
+                <label class="label-sm">Email *</label>
+                <input type="email" id="edit-self-email" class="form-control mb-10" placeholder="example@mail.com">
                 
                 <button class="btn-add" id="save-profile-btn">Save Changes</button>
             </div>
 
             <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
-            <!-- SECTION 2: CREATE NEW ADMIN (New Feature) -->
-            <h3 style="margin-bottom: 15px;">Create New Admin</h3>
-            <div style="background: #F8F9FD; padding: 15px; border-radius: 12px; border: 1px solid #eee;">
-                <label style="font-size:12px; font-weight:600; color:#888;">New Admin Username *</label>
-                <input type="text" id="modal-new-admin-user" class="form-control" placeholder="New Username" style="margin-bottom:10px;">
+            <h3 class="mb-15">Create New Admin</h3>
+            <div class="new-admin-box">
+                <label class="label-sm">New Admin Username *</label>
+                <input type="text" id="modal-new-admin-user" class="form-control mb-10" placeholder="New Username">
                 
-                <label style="font-size:12px; font-weight:600; color:#888;">New Admin Password *</label>
-                <input type="text" id="modal-new-admin-pass" class="form-control" placeholder="New Password" style="margin-bottom:10px;">
+                <label class="label-sm">New Admin Password *</label>
+                <input type="text" id="modal-new-admin-pass" class="form-control mb-10" placeholder="New Password">
                 
-                <button class="btn-add" id="modal-create-admin-btn" style="background-color: #2ECC71;">Create Admin</button>
+                <button class="btn-add btn-create-admin" id="modal-create-admin-btn">Create Admin</button>
             </div>
         </div>
     </div>
@@ -384,10 +434,8 @@
     <div class="modal-overlay" id="discount-report-modal">
         <div class="modal-content">
             <i class="ri-close-line modal-close-icon" onclick="closeReportModal()"></i>
-            <h3 style="margin-bottom: 20px;">Usage Report</h3>
-            <div id="report-content" style="text-align: center;">
-                <!-- Filled by JS -->
-            </div>
+            <h3 class="mb-20">Usage Report</h3>
+            <div id="report-content" style="text-align: center;"></div>
         </div>
     </div>
 
@@ -395,21 +443,18 @@
     <div class="modal-overlay" id="discount-modal">
         <div class="modal-content">
             <i class="ri-close-line modal-close-icon" onclick="document.getElementById('discount-modal').style.display='none'"></i>
-            <h3 id="modal-title" style="margin-bottom: 20px;">Create Discount Code</h3>
+            <h3 id="modal-title" class="mb-20">Create Discount Code</h3>
             
-            <!-- Step 1: Percentage (NEW) -->
             <div class="step-section">
                 <div class="step-title">1. Discount Percentage (%)</div>
                 <input type="number" id="disc-percent" class="form-control" placeholder="e.g. 15" style="margin-bottom:5px;">
             </div>
 
-            <!-- Step 2: Code Name -->
             <div class="step-section">
                 <div class="step-title">2. Discount Code Name</div>
                 <input type="text" id="disc-code-name" class="form-control" placeholder="SUMMER2024" style="margin-bottom:5px;">
             </div>
 
-            <!-- Step 3: Discount Scope -->
             <div class="step-section">
                 <div class="step-title">3. Discount Type (Scope)</div>
                 <div class="radio-group">
@@ -418,7 +463,7 @@
                 </div>
                 
                 <div id="private-filters" style="display: none;" class="filter-box">
-                    <p style="font-size:12px; color:#888; margin-bottom:10px;">Filter Customers:</p>
+                    <p class="text-xs-grey mb-10">Filter Customers:</p>
                     <select id="disc-filter-type" class="form-control" onchange="updateFilterInputs()" style="padding:8px; font-size:13px;">
                         <option value="none">-- Select Filter --</option>
                         <option value="inactive">Inactive > 1 Month</option>
@@ -437,7 +482,6 @@
                 </div>
             </div>
 
-            <!-- Step 4: Usage Limits -->
             <div class="step-section">
                 <div class="step-title">4. Usage Type</div>
                 <div class="radio-group">
@@ -447,7 +491,6 @@
                 <input type="number" id="disc-usage-limit" class="form-control" placeholder="Max usage count per user" style="display:none; margin-top:10px;">
             </div>
 
-            <!-- Step 5: Duration -->
             <div class="step-section">
                 <div class="step-title">5. Duration & Limits</div>
                 <div class="radio-group">
@@ -492,12 +535,11 @@
                 </div>
 
                 <div style="margin-top:15px;">
-                    <label style="font-size:12px; color:#888; margin-bottom: 5px; font-weight: 600; display:block;">Min Order Amount ($):</label>
+                    <label class="label-sm">Min Order Amount ($):</label>
                     <input type="number" id="disc-min-order" class="form-control" placeholder="0" value="0">
                 </div>
             </div>
 
-            <!-- Step 6: Status (Moved Here) -->
             <div class="step-section" id="status-section">
                 <div class="step-title">6. Status</div>
                 <div class="radio-group">
